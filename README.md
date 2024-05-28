@@ -64,3 +64,36 @@ LIMIT 100000;
 
 ```
 
+Exploring different datasets using cross-join and round functions. There are two tables joined together to produce the required outcome. Therefore, the code below shows some adjustments made on the queries to achieve different results. *Production* is the name of the schema. Download *datalab_export_2024-05-28 02_11_34.csv* and *datalab_export_2024-05-28 02_12_03.csv* above
+```sql
+SELECT TOP 10000 * 
+FROM production.stocks
+CROSS JOIN production.products;
+
+SELECT product_name,
+	   model_year,
+	   quantity AS quantity_produced,
+	   list_price AS price_of_product
+FROM  production.stocks
+CROSS JOIN production.products;
+
+SELECT TOP 1000 product_name,
+	   model_year,
+	   quantity AS quantity_produced,
+	   ROUND(list_price, -1) AS price_of_product
+FROM  production.stocks
+CROSS JOIN production.products;
+
+SELECT TOP 1000 product_name,
+	   model_year,
+	   quantity AS quantity_produced,
+	   ROUND(list_price, 2) AS price_of_product
+FROM  production.stocks
+CROSS JOIN production.products;
+```
+
+OUTPUT
+
+![OUTPUT](https://github.com/Clifford254KE/SQL-Codes/assets/140185917/be273272-da80-4e3a-87a1-f3b7e3115402)
+
+
