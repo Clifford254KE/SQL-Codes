@@ -1,5 +1,5 @@
 # SQL-Codes
-
+---
 ### This repository displays different SQL codes to answer various questions using different datasets.
 
 
@@ -16,7 +16,7 @@ OUTPUT
 
 ![SQL1](https://github.com/Clifford254KE/SQL-Codes/assets/140185917/b9a28bdf-4585-4b0a-921d-2b095e15fe97)
 
-The output looks shaggy in the birth_date and hire_date columns. I only need years- this is achieved using extract query 
+The output looks shaggy in the birth_date and hire_date columns. I only need years- this is achieved by using extract query 
 The code written below answers the question above. 
 ```sql
 SELECT first_name,
@@ -38,4 +38,29 @@ OUTPUT
 ![SQL2](https://github.com/Clifford254KE/SQL-Codes/assets/140185917/38ddda01-ac75-435b-882e-e4ea6ab3b017)
 
 NB. The original dataset (data A) and final output (data B) are uploaded above. 
+---
+Other useful codes for the same dataset
+
+```sql
+This extracts birth_date and birth_month in different columns.
+SELECT birth_date,
+       EXTRACT(YEAR FROM birth_date) AS birth_year,
+       EXTRACT(MONTH FROM birth_date) AS birth_month,
+       EXTRACT(DAY FROM birth_date) AS birth_day
+FROM employees.employees
+ORDER BY birth_date DESC
+LIMIT 100000;
+
+This one adds the layer of age of employees when they were hired. This is obtained by hired year - birth year.
+SELECT first_name,
+       last_name,
+       gender,
+       EXTRACT(YEAR FROM birth_date) AS birth_year,
+       EXTRACT(YEAR FROM hire_date) AS hired_year,
+	   (EXTRACT(YEAR FROM hire_date) - EXTRACT(YEAR FROM birth_date)) AS age_when_hired
+FROM employees.employees
+WHERE gender = 'M'
+LIMIT 100000;
+
+```
 
